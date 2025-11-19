@@ -1,11 +1,23 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: false,
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+export class RegistraseComponent {
 
+  constructor(private router: Router) {}
+
+  goLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  showPassword = false;
+
+togglePassword() {
+  this.showPassword = !this.showPassword;
+}
 }

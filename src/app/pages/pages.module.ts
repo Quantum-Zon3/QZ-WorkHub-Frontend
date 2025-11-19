@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { RegistraseComponent } from './register/register.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { EspaciosComponent } from './espacios/espacios.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent,
+    RegistraseComponent,
     PerfilComponent,
     EspaciosComponent
   ],
