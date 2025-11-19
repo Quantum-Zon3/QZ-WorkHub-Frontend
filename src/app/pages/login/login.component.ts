@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from "../../service/auth";
 @Component({
   selector: "app-inicio-secion",
   standalone: false,
@@ -11,7 +11,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -20,17 +23,26 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.invalid) {
-      alert("❌ Formulario inválido");
       this.loginForm.markAllAsTouched();
       return;
     }
 
-    const email = this.loginForm.value.email;
-    const password = this.loginForm.value.password;
+    const data = this.loginForm.value;
 
-    console.log("📨 Datos listos para enviar:");
-    console.log({ email, password });
+    this.authService.login(data).subscribe({
+      next: (response) => {
+        console.log('Login exitoso:', response);
+        
+        // Si el backend devuelve un token:
+        // localStorage.setItem('token', response.token);
 
+        alert('Inicio de sesión exitoso');
+      },
+      error: (err) => {
+        console.error('Error en login:', err);
+        alert('Credenciales incorrectas');
+      }
+    });
   }
   passwordVisible = false;
 

@@ -12,7 +12,7 @@ import { App } from './app';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
     FormsModule
   ],
   providers: [
