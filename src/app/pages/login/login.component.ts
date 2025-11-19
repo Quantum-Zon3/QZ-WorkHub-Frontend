@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from "../../service/auth";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-inicio-secion",
   standalone: false,
@@ -13,7 +14,8 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -28,6 +30,7 @@ export class LoginComponent {
     }
 
     const data = this.loginForm.value;
+    console.log("DATA ENVIADA:", this.loginForm.value);
 
     this.authService.login(data).subscribe({
       next: (response) => {
@@ -53,5 +56,9 @@ export class LoginComponent {
     if (input) {
       input.type = this.passwordVisible ? 'text' : 'password';
     }
+  }
+
+  goRegister() {
+    this.router.navigate(['/register']);
   }
 }
